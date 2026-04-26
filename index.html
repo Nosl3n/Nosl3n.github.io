@@ -64,6 +64,7 @@
         <p class="member-note">
           Las pestañas 2 y 3 permanecen bloqueadas hasta completar todos los exámenes, la técnica y las 5 asistencias.
         </p>
+        <p id="memberSessionTimer" class="session-timer">Sesión activa: 10:00</p>
       </div>
 
       <div class="tabs" role="tablist" aria-label="Secciones del aspirante">
@@ -103,20 +104,9 @@
           <article class="dashboard-card">
             <div class="card-head">
               <h3>Técnica de lucha de brazos</h3>
-              <span class="pill pill-hot">Hook / Toproll</span>
+              <span class="pill pill-hot">Solo el admin puede cambiarla</span>
             </div>
-            <p class="card-copy">Elige la técnica principal y revisa tu progreso en ella y en las dos barras.</p>
-
-            <div class="tech-selector">
-              <label class="tech-option">
-                <input type="radio" name="technique" value="Hook" checked>
-                <span>Hook</span>
-              </label>
-              <label class="tech-option">
-                <input type="radio" name="technique" value="Toproll">
-                <span>Toproll</span>
-              </label>
-            </div>
+            <p class="card-copy">La técnica queda asignada por la administración y solo desde ahí puede cambiarse.</p>
 
             <div class="tech-highlight">
               <div>
@@ -170,17 +160,75 @@
       </div>
 
       <div class="tab-panel" id="tab-2" role="tabpanel" hidden>
-        <article class="locked-panel">
-          <h3>Pestaña 2</h3>
-          <p>Bloqueada. Se activará cuando el aspirante complete todos los exámenes y asistencias.</p>
-        </article>
+        <div class="dashboard-grid tab-two-grid">
+          <article class="dashboard-card">
+            <div class="card-head">
+              <h3>Pruebas de ingreso</h3>
+              <span class="pill">0 a 20</span>
+            </div>
+            <div class="score-stack">
+              <div class="score-row">
+                <span>Examen de conocimientos</span>
+                <strong id="knowledgeValue">0/20</strong>
+              </div>
+              <div class="progress-track small"><div id="knowledgeBar" class="progress-fill" style="width: 0%;"></div></div>
+
+              <div class="score-row">
+                <span>Examen social</span>
+                <strong id="socialValue">0/20</strong>
+              </div>
+              <div class="progress-track small"><div id="socialBar" class="progress-fill" style="width: 0%;"></div></div>
+
+              <div class="score-row">
+                <span>Prueba de counseling</span>
+                <strong id="counselingValue">Observado</strong>
+              </div>
+              <p class="helper-copy">Solo el admin puede cambiar este estado.</p>
+            </div>
+          </article>
+
+          <article class="dashboard-card">
+            <div class="card-head">
+              <h3>Pago de inscripción</h3>
+              <span class="pill pill-hot">S/ 25</span>
+            </div>
+            <div id="paymentValue" class="status-badge">No pago</div>
+            <p class="card-copy">El estado de pago se modifica únicamente por el admin.</p>
+            <div class="unlock-status compact">
+              <span class="section-tag">Condición</span>
+              <p>Esta pestaña queda disponible cuando la pestaña 1 se completa.</p>
+            </div>
+          </article>
+        </div>
       </div>
 
       <div class="tab-panel" id="tab-3" role="tabpanel" hidden>
-        <article class="locked-panel">
-          <h3>Pestaña 3</h3>
-          <p>Bloqueada. Aquí podrás agregar más evaluaciones o contenido interno después del desbloqueo.</p>
-        </article>
+        <div class="dashboard-grid tab-three-grid">
+          <article class="dashboard-card">
+            <div class="card-head">
+              <h3>Prueba psicológica</h3>
+              <span class="pill">Auto-guardado</span>
+            </div>
+            <p class="card-copy">El resultado se guarda automáticamente al completar la prueba. El aspirante solo verá “Prueba realizada”.</p>
+            <div id="psychMemberStatus" class="status-badge">Prueba no realizada</div>
+            <div id="psychDetailMember" class="hidden-text hidden">Resultado visible solo para administración.</div>
+          </article>
+
+          <article class="dashboard-card">
+            <div class="card-head">
+              <h3>Votación del consejo</h3>
+              <span class="pill">Mayor / menor</span>
+            </div>
+            <div id="councilVoteValue" class="status-badge">Pendiente</div>
+            <a id="councilLink" class="ghost-button disabled-link" href="#" target="_blank" rel="noopener">Link desactivado</a>
+            <p class="card-copy">Si el consejo aprueba, el enlace cambia según si el aspirante es mayor o menor de edad.</p>
+            <div class="unlock-status compact">
+              <span class="section-tag">Documento</span>
+              <p id="documentStatus">Documento incompleto</p>
+            </div>
+            <div id="finalMessage" class="final-message hidden">FELICITACIONES, INGRESASTE AL CLUB TOP3VULCANS</div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -193,6 +241,7 @@
         <p class="member-note">
           La cuenta admin puede revisar usuarios existentes, confirmar su estado y modificar progreso, técnica y asistencias.
         </p>
+        <p id="adminSessionTimer" class="session-timer">Sesión activa: 10:00</p>
       </div>
 
       <div class="admin-layout">
@@ -236,15 +285,8 @@
                 </div>
                 <input id="adminExerciseTwo" class="range-control" type="range" min="0" max="100" step="1">
               </div>
-            </article>
 
-            <article class="dashboard-card">
-              <div class="card-head">
-                <h3>Técnica y asistencias</h3>
-                <span class="pill pill-hot">Hook / Toproll</span>
-              </div>
-
-              <label class="field-label" for="adminTechnique">Técnica activa</label>
+              <label class="field-label" for="adminTechnique">Técnica asignada</label>
               <select id="adminTechnique" class="select-control">
                 <option value="Hook">Hook</option>
                 <option value="Toproll">Toproll</option>
@@ -273,18 +315,113 @@
                 </div>
                 <input id="adminAttendance" class="range-control" type="range" min="0" max="5" step="1">
               </div>
-            </article>
-
-            <article class="dashboard-card">
-              <div class="card-head">
-                <h3>Estado de control</h3>
-                <span class="pill">Verificación</span>
-              </div>
 
               <label class="toggle-row">
                 <input id="adminVerified" type="checkbox">
                 <span>Aspirante verificado</span>
               </label>
+            </article>
+
+            <article class="dashboard-card">
+              <div class="card-head">
+                <h3>Pruebas tab 2</h3>
+                <span class="pill pill-hot">0 a 20 y estado</span>
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Examen de conocimientos</strong>
+                  <span id="adminKnowledgeValue">0/20</span>
+                </div>
+                <input id="adminKnowledge" class="range-control" type="range" min="0" max="20" step="1">
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Examen social</strong>
+                  <span id="adminSocialValue">0/20</span>
+                </div>
+                <input id="adminSocial" class="range-control" type="range" min="0" max="20" step="1">
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Prueba de counseling</strong>
+                  <span id="adminCounselingValue">observado</span>
+                </div>
+                <select id="adminCounseling" class="select-control">
+                  <option value="observado">observado</option>
+                  <option value="desaprobado">desaprobado</option>
+                  <option value="aprobado">aprobado</option>
+                </select>
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Pago de S/25</strong>
+                  <span id="adminPaymentValue">No pago</span>
+                </div>
+                <select id="adminPayment" class="select-control">
+                  <option value="no_pago">No pago</option>
+                  <option value="pago">Pago</option>
+                </select>
+              </div>
+            </article>
+
+            <article class="dashboard-card">
+              <div class="card-head">
+                <h3>Prueba tab 3</h3>
+                <span class="pill">Auto-guardado</span>
+              </div>
+
+              <div class="psych-grid">
+                <label class="score-field">
+                  <span>Control emocional</span>
+                  <select id="adminPsychControl" class="select-control">
+                    <option value="0">Muy bajo</option>
+                    <option value="1">Medio</option>
+                    <option value="2">Alto</option>
+                  </select>
+                </label>
+                <label class="score-field">
+                  <span>Trabajo en grupo</span>
+                  <select id="adminPsychGroup" class="select-control">
+                    <option value="0">Muy bajo</option>
+                    <option value="1">Medio</option>
+                    <option value="2">Alto</option>
+                  </select>
+                </label>
+                <label class="score-field">
+                  <span>Tolerancia a presión</span>
+                  <select id="adminPsychPressure" class="select-control">
+                    <option value="0">Muy bajo</option>
+                    <option value="1">Medio</option>
+                    <option value="2">Alto</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="psych-result-box">
+                <span class="section-tag">Resultado guardado</span>
+                <strong id="adminPsychResult">Pendiente</strong>
+              </div>
+
+              <label class="field-label" for="adminAge">Edad del aspirante</label>
+              <input id="adminAge" class="select-control" type="number" min="10" max="99" step="1">
+
+              <label class="field-label" for="adminCouncilVote">Votación del consejo</label>
+              <select id="adminCouncilVote" class="select-control">
+                <option value="pendiente">Pendiente</option>
+                <option value="aprobado">Aprobado</option>
+                <option value="rechazado">Rechazado</option>
+              </select>
+
+              <label class="toggle-row">
+                <input id="adminDocumentComplete" type="checkbox">
+                <span>Documento completo</span>
+              </label>
+
+              <a id="adminCouncilLink" class="ghost-button disabled-link" href="#" target="_blank" rel="noopener">Link desactivado</a>
 
               <div class="admin-actions-column">
                 <button id="saveUserBtn" class="login-button" type="button">Guardar cambios</button>
@@ -306,63 +443,143 @@
   </main>
 
   <script>
+    const STORAGE_KEY = 'top3vulcans-users-v3';
+    const SESSION_LIMIT_MS = 10 * 60 * 1000;
+
     const acceptedAccounts = [
-      { username: 'aspirante1', password: 'lava123', role: 'member', name: 'Aspirante 1' },
-      { username: 'aspirante2', password: 'lava456', role: 'member', name: 'Aspirante 2' },
-      { username: 'top3vulcans', password: 'misti2026', role: 'member', name: 'Top3Vulcans Aspirante' },
-      { username: 'arequipa', password: 'mistiFuego', role: 'member', name: 'Aspirante Arequipa' },
+      { username: 'frangan', password: 'franagan1', role: 'member', name: 'Aspirante 1' },
+      { username: 'nelson', password: 'nelson1', role: 'member', name: 'Aspirante 2' },
+      { username: 'manuel', password: 'manuel1', role: 'member', name: 'Top3Vulcans Aspirante' },
+      { username: 'jorge', password: 'jorge1', role: 'member', name: 'Aspirante Arequipa' },
       { username: 'admin', password: 'admin2026', role: 'admin', name: 'Administrador Top3Vulcans' }
     ];
 
-    const userState = [
+    const defaultUserState = [
       {
-        username: 'aspirante1',
+        username: 'frangan',
         name: 'Aspirante 1',
+        age: 19,
         verified: true,
         exerciseOne: 65,
         exerciseTwo: 45,
         activeTechnique: 'Hook',
         techniques: { Hook: 58, Toproll: 36 },
         attendance: 3,
-        attendanceGoal: 5
+        attendanceGoal: 5,
+        knowledge: 12,
+        social: 10,
+        counseling: 'observado',
+        payment: 'no_pago',
+        psych: { control: 1, group: 2, pressure: 1, completed: false, result: 'Prueba no realizada' },
+        councilVote: 'pendiente',
+        documentComplete: false
       },
       {
-        username: 'aspirante2',
+        username: 'nelson',
         name: 'Aspirante 2',
+        age: 17,
         verified: false,
         exerciseOne: 38,
         exerciseTwo: 52,
         activeTechnique: 'Toproll',
         techniques: { Hook: 28, Toproll: 61 },
         attendance: 2,
-        attendanceGoal: 5
+        attendanceGoal: 5,
+        knowledge: 8,
+        social: 11,
+        counseling: 'observado',
+        payment: 'no_pago',
+        psych: { control: 0, group: 1, pressure: 1, completed: false, result: 'Prueba no realizada' },
+        councilVote: 'pendiente',
+        documentComplete: false
       },
       {
-        username: 'top3vulcans',
+        username: 'manuel',
         name: 'Top3Vulcans Aspirante',
+        age: 20,
         verified: true,
         exerciseOne: 80,
         exerciseTwo: 74,
         activeTechnique: 'Hook',
         techniques: { Hook: 69, Toproll: 42 },
         attendance: 4,
-        attendanceGoal: 5
+        attendanceGoal: 5,
+        knowledge: 14,
+        social: 13,
+        counseling: 'desaprobado',
+        payment: 'pago',
+        psych: { control: 2, group: 2, pressure: 1, completed: false, result: 'Prueba no realizada' },
+        councilVote: 'pendiente',
+        documentComplete: false
       },
       {
-        username: 'arequipa',
+        username: 'jorge',
         name: 'Aspirante Arequipa',
+        age: 16,
         verified: false,
         exerciseOne: 22,
         exerciseTwo: 31,
         activeTechnique: 'Hook',
         techniques: { Hook: 25, Toproll: 18 },
         attendance: 1,
-        attendanceGoal: 5
+        attendanceGoal: 5,
+        knowledge: 5,
+        social: 7,
+        counseling: 'observado',
+        payment: 'no_pago',
+        psych: { control: 0, group: 0, pressure: 1, completed: false, result: 'Prueba no realizada' },
+        councilVote: 'pendiente',
+        documentComplete: false
       }
     ];
 
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function mergeUser(base, saved) {
+      if (!saved) {
+        return clone(base);
+      }
+
+      return {
+        ...clone(base),
+        ...saved,
+        techniques: { ...base.techniques, ...(saved.techniques || {}) },
+        psych: { ...base.psych, ...(saved.psych || {}) }
+      };
+    }
+
+    function loadUserState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          return clone(defaultUserState);
+        }
+
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) {
+          return clone(defaultUserState);
+        }
+
+        return defaultUserState.map(function (baseUser) {
+          const savedUser = parsed.find(function (item) {
+            return item.username === baseUser.username;
+          });
+          return mergeUser(baseUser, savedUser);
+        });
+      } catch (error) {
+        return clone(defaultUserState);
+      }
+    }
+
+    let userState = loadUserState();
     let activeAccount = null;
+    let currentMember = null;
     let selectedUser = userState[0];
+    let sessionTimeoutId = null;
+    let sessionTickerId = null;
+    let lastActivityAt = 0;
 
     const loginForm = document.getElementById('loginForm');
     const loginMessage = document.getElementById('loginMessage');
@@ -371,6 +588,8 @@
     const adminApp = document.getElementById('adminApp');
     const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
     const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
+    const memberSessionTimer = document.getElementById('memberSessionTimer');
+    const adminSessionTimer = document.getElementById('adminSessionTimer');
     const selectedTechnique = document.getElementById('selectedTechnique');
     const techniqueValue = document.getElementById('techniqueValue');
     const exerciseOneBar = document.getElementById('exerciseOneBar');
@@ -382,6 +601,18 @@
     const attendanceDots = document.getElementById('attendanceDots');
     const attendanceValue = document.getElementById('attendanceValue');
     const unlockMessage = document.getElementById('unlockMessage');
+    const knowledgeBar = document.getElementById('knowledgeBar');
+    const socialBar = document.getElementById('socialBar');
+    const knowledgeValue = document.getElementById('knowledgeValue');
+    const socialValue = document.getElementById('socialValue');
+    const counselingValue = document.getElementById('counselingValue');
+    const paymentValue = document.getElementById('paymentValue');
+    const psychMemberStatus = document.getElementById('psychMemberStatus');
+    const psychDetailMember = document.getElementById('psychDetailMember');
+    const councilVoteValue = document.getElementById('councilVoteValue');
+    const councilLink = document.getElementById('councilLink');
+    const documentStatus = document.getElementById('documentStatus');
+    const finalMessage = document.getElementById('finalMessage');
     const addAttendanceBtn = document.getElementById('addAttendanceBtn');
     const resetAttendanceBtn = document.getElementById('resetAttendanceBtn');
     const userSearch = document.getElementById('userSearch');
@@ -396,79 +627,252 @@
     const adminToproll = document.getElementById('adminToproll');
     const adminAttendance = document.getElementById('adminAttendance');
     const adminVerified = document.getElementById('adminVerified');
+    const adminKnowledge = document.getElementById('adminKnowledge');
+    const adminSocial = document.getElementById('adminSocial');
+    const adminCounseling = document.getElementById('adminCounseling');
+    const adminPayment = document.getElementById('adminPayment');
+    const adminPsychControl = document.getElementById('adminPsychControl');
+    const adminPsychGroup = document.getElementById('adminPsychGroup');
+    const adminPsychPressure = document.getElementById('adminPsychPressure');
+    const adminPsychResult = document.getElementById('adminPsychResult');
+    const adminAge = document.getElementById('adminAge');
+    const adminCouncilVote = document.getElementById('adminCouncilVote');
+    const adminDocumentComplete = document.getElementById('adminDocumentComplete');
+    const adminCouncilLink = document.getElementById('adminCouncilLink');
     const adminExerciseOneValue = document.getElementById('adminExerciseOneValue');
     const adminExerciseTwoValue = document.getElementById('adminExerciseTwoValue');
     const adminHookValue = document.getElementById('adminHookValue');
     const adminToprollValue = document.getElementById('adminToprollValue');
     const adminAttendanceValue = document.getElementById('adminAttendanceValue');
+    const adminKnowledgeValue = document.getElementById('adminKnowledgeValue');
+    const adminSocialValue = document.getElementById('adminSocialValue');
+    const adminCounselingValue = document.getElementById('adminCounselingValue');
+    const adminPaymentValue = document.getElementById('adminPaymentValue');
     const adminUnlockMessage = document.getElementById('adminUnlockMessage');
     const adminStatus = document.getElementById('adminStatus');
     const saveUserBtn = document.getElementById('saveUserBtn');
     const unlockAllBtn = document.getElementById('unlockAllBtn');
     const backToLoginBtn = document.getElementById('backToLoginBtn');
 
-    const appState = {
-      exerciseOne: 65,
-      exerciseTwo: 45,
-      techniques: {
-        Hook: 58,
-        Toproll: 36
-      },
-      activeTechnique: 'Hook',
-      attendance: 3,
-      attendanceGoal: 5
-    };
-
-    function getMemberProgress(user) {
-      return user.exerciseOne >= 100 && user.exerciseTwo >= 100 && user.techniques[user.activeTechnique] >= 100 && user.attendance >= user.attendanceGoal;
+    function persistUserState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
+      } catch (error) {
+        // Ignore storage failures and keep the in-memory session working.
+      }
     }
 
     function findUser(username) {
       return userState.find(function (user) {
         return user.username === username;
+      }) || null;
+    }
+
+    function ensureUser(username) {
+      const existingUser = findUser(username);
+      if (existingUser) {
+        return existingUser;
+      }
+
+      const fallbackUser = defaultUserState.find(function (user) {
+        return user.username === username;
       });
+
+      if (!fallbackUser) {
+        return null;
+      }
+
+      const newUser = clone(fallbackUser);
+      userState.push(newUser);
+      persistUserState();
+      return newUser;
     }
 
-    function renderProgressBars() {
-      exerciseOneBar.style.width = appState.exerciseOne + '%';
-      exerciseTwoBar.style.width = appState.exerciseTwo + '%';
-      exerciseOneValue.textContent = appState.exerciseOne + '%';
-      exerciseTwoValue.textContent = appState.exerciseTwo + '%';
-      selectedTechnique.textContent = appState.activeTechnique;
-      techniqueValue.textContent = appState.techniques[appState.activeTechnique] + '%';
-      hookBar.style.width = appState.techniques.Hook + '%';
-      toprollBar.style.width = appState.techniques.Toproll + '%';
-      renderAttendance();
-      updateUnlockState();
+    function isTabOneComplete(user) {
+      return Boolean(
+        user &&
+        user.verified &&
+        user.exerciseOne >= 100 &&
+        user.exerciseTwo >= 100 &&
+        user.techniques[user.activeTechnique] >= 100 &&
+        user.attendance >= user.attendanceGoal
+      );
     }
 
-    function renderAttendance() {
+    function isTabTwoComplete(user) {
+      return Boolean(
+        user &&
+        user.knowledge >= 10 &&
+        user.social >= 10 &&
+        user.counseling === 'aprobado' &&
+        user.payment === 'pago'
+      );
+    }
+
+    function isTabThreeComplete(user) {
+      return Boolean(user && user.psych.completed && user.councilVote === 'aprobado');
+    }
+
+    function isFullyApproved(user) {
+      return Boolean(user && isTabOneComplete(user) && isTabTwoComplete(user) && isTabThreeComplete(user) && user.documentComplete);
+    }
+
+    function formatTime(milliseconds) {
+      const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
+      const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
+      return minutes + ':' + seconds;
+    }
+
+    function updateSessionTimerDisplay() {
+      if (!activeAccount) {
+        if (memberSessionTimer) memberSessionTimer.textContent = 'Sesión activa: 10:00';
+        if (adminSessionTimer) adminSessionTimer.textContent = 'Sesión activa: 10:00';
+        return;
+      }
+
+      const elapsed = Date.now() - lastActivityAt;
+      const remaining = Math.max(0, SESSION_LIMIT_MS - elapsed);
+      const label = 'Sesión activa: ' + formatTime(remaining);
+
+      if (memberSessionTimer) memberSessionTimer.textContent = label;
+      if (adminSessionTimer) adminSessionTimer.textContent = label;
+    }
+
+    function stopSessionMonitoring() {
+      clearTimeout(sessionTimeoutId);
+      clearInterval(sessionTickerId);
+      sessionTimeoutId = null;
+      sessionTickerId = null;
+    }
+
+    function forceLogout(message) {
+      stopSessionMonitoring();
+      activeAccount = null;
+      currentMember = null;
+      selectedUser = userState[0];
+
+      document.querySelector('.hero-panel').classList.remove('hidden');
+      document.querySelector('.login-panel').classList.remove('hidden');
+      memberApp.classList.add('hidden');
+      adminApp.classList.add('hidden');
+      welcomeBox.classList.add('hidden');
+      loginMessage.textContent = message || '';
+      loginForm.reset();
+      updateSessionTimerDisplay();
+    }
+
+    function handleSessionTimeout() {
+      if (!activeAccount) {
+        return;
+      }
+
+      forceLogout('Cuenta desactivada por inactividad mayor a 10 minutos.');
+    }
+
+    function startSessionMonitoring() {
+      stopSessionMonitoring();
+      lastActivityAt = Date.now();
+      sessionTimeoutId = setTimeout(handleSessionTimeout, SESSION_LIMIT_MS);
+      sessionTickerId = setInterval(updateSessionTimerDisplay, 1000);
+      updateSessionTimerDisplay();
+    }
+
+    function markActivity() {
+      if (!activeAccount) {
+        return;
+      }
+
+      lastActivityAt = Date.now();
+      clearTimeout(sessionTimeoutId);
+      sessionTimeoutId = setTimeout(handleSessionTimeout, SESSION_LIMIT_MS);
+      updateSessionTimerDisplay();
+    }
+
+    ['click', 'keydown', 'pointerdown', 'input', 'change', 'scroll'].forEach(function (eventName) {
+      document.addEventListener(eventName, function () {
+        markActivity();
+      }, { passive: true });
+    });
+
+    function updateMemberPanel() {
+      const user = currentMember;
+      if (!user) {
+        return;
+      }
+
+      exerciseOneBar.style.width = user.exerciseOne + '%';
+      exerciseTwoBar.style.width = user.exerciseTwo + '%';
+      exerciseOneValue.textContent = user.exerciseOne + '%';
+      exerciseTwoValue.textContent = user.exerciseTwo + '%';
+      selectedTechnique.textContent = user.activeTechnique;
+      techniqueValue.textContent = user.techniques[user.activeTechnique] + '%';
+      hookBar.style.width = user.techniques.Hook + '%';
+      toprollBar.style.width = user.techniques.Toproll + '%';
+
       attendanceDots.innerHTML = '';
-
-      for (let index = 0; index < appState.attendanceGoal; index += 1) {
+      for (let index = 0; index < user.attendanceGoal; index += 1) {
         const dot = document.createElement('span');
-        dot.className = index < appState.attendance ? 'attendance-dot filled' : 'attendance-dot';
+        dot.className = index < user.attendance ? 'attendance-dot filled' : 'attendance-dot';
         attendanceDots.appendChild(dot);
       }
 
-      attendanceValue.textContent = appState.attendance + ' de ' + appState.attendanceGoal;
-    }
+      attendanceValue.textContent = user.attendance + ' de ' + user.attendanceGoal;
 
-    function allRequirementsMet() {
-      return appState.exerciseOne >= 100 && appState.exerciseTwo >= 100 && appState.techniques[appState.activeTechnique] >= 100 && appState.attendance >= appState.attendanceGoal;
-    }
-
-    function updateUnlockState() {
-      const unlocked = allRequirementsMet();
-
+      const tabOneComplete = isTabOneComplete(user);
       tabButtons.slice(1).forEach(function (button) {
-        button.disabled = !unlocked;
-        button.classList.toggle('locked', !unlocked);
+        button.disabled = !tabOneComplete;
+        button.classList.toggle('locked', !tabOneComplete);
       });
 
-      unlockMessage.textContent = unlocked
-        ? 'Todos los exámenes fueron completados. Las pestañas 2 y 3 ya están activas.'
-        : 'Aún falta completar los dos ejercicios, la técnica elegida y las 5 asistencias para activar las pestañas 2 y 3.';
+      unlockMessage.textContent = tabOneComplete
+        ? 'La pestaña 1 ya está completa. Las pestañas 2 y 3 están disponibles.'
+        : 'Completa los dos ejercicios, la técnica asignada, la asistencia mínima y la verificación para activar las pestañas 2 y 3.';
+
+      knowledgeValue.textContent = user.knowledge + '/20';
+      socialValue.textContent = user.social + '/20';
+      knowledgeBar.style.width = (user.knowledge / 20) * 100 + '%';
+      socialBar.style.width = (user.social / 20) * 100 + '%';
+      counselingValue.textContent = user.counseling.charAt(0).toUpperCase() + user.counseling.slice(1);
+      paymentValue.textContent = user.payment === 'pago' ? 'Pago' : 'No pago';
+
+      psychMemberStatus.textContent = user.psych.completed ? 'Prueba realizada' : 'Prueba no realizada';
+      psychDetailMember.textContent = user.psych.completed ? 'Resultado guardado automáticamente por el sistema. Solo admin ve el detalle completo.' : 'Resultado visible solo para administración.';
+
+      councilVoteValue.textContent = user.councilVote === 'aprobado' ? 'Aprobado' : user.councilVote === 'rechazado' ? 'Rechazado' : 'Pendiente';
+      if (user.councilVote === 'aprobado') {
+        const isAdult = Number(user.age) >= 18;
+        councilLink.href = isAdult ? '#documento-mayor' : '#documento-menor';
+        councilLink.textContent = isAdult ? 'Link para mayor de edad' : 'Link para menor de edad';
+        councilLink.classList.remove('disabled-link');
+      } else {
+        councilLink.href = '#';
+        councilLink.textContent = 'Link desactivado';
+        councilLink.classList.add('disabled-link');
+      }
+
+      documentStatus.textContent = user.documentComplete ? 'Documento completo' : 'Documento incompleto';
+      finalMessage.classList.toggle('hidden', !isFullyApproved(user));
+
+      showTab('tab-1');
+    }
+
+    function renderPsychResult(user) {
+      const score = Number(user.psych.control) + Number(user.psych.group) + Number(user.psych.pressure);
+      let resultText = '';
+
+      if (score >= 5) {
+        resultText = 'Perfil estable. Baja predisposición a ansiedad, impulsividad y conflicto grupal.';
+      } else if (score >= 3) {
+        resultText = 'Perfil intermedio. Puede mostrar estrés o tensión bajo presión; requiere seguimiento.';
+      } else {
+        resultText = 'Perfil sensible. Predisposición elevada a estrés, baja tolerancia a presión y dificultad grupal.';
+      }
+
+      user.psych.completed = true;
+      user.psych.result = resultText;
+      user.psych.score = score;
+      user.psych.updatedAt = new Date().toISOString();
     }
 
     function renderUserList() {
@@ -486,7 +890,7 @@
           button.innerHTML =
             '<strong>' + user.name + '</strong>' +
             '<span>@' + user.username + '</span>' +
-            '<em>' + (getMemberProgress(user) ? 'Listo para desbloqueo' : 'En evaluación') + '</em>';
+            '<em>' + (isFullyApproved(user) ? 'Aprobado' : isTabOneComplete(user) ? 'En avance' : 'En evaluación') + '</em>';
 
           button.addEventListener('click', function () {
             selectUser(user.username);
@@ -497,28 +901,62 @@
     }
 
     function syncAdminForm() {
-      adminUserName.textContent = selectedUser.name;
-      adminUserMeta.textContent = 'Usuario: @' + selectedUser.username + ' · Técnica activa: ' + selectedUser.activeTechnique;
-      adminVerificationPill.textContent = selectedUser.verified ? 'Verificado' : 'No verificado';
-      adminVerificationPill.className = selectedUser.verified ? 'pill pill-hot' : 'pill';
+      const user = selectedUser;
+      if (!user) {
+        return;
+      }
 
-      adminExerciseOne.value = selectedUser.exerciseOne;
-      adminExerciseTwo.value = selectedUser.exerciseTwo;
-      adminTechnique.value = selectedUser.activeTechnique;
-      adminHook.value = selectedUser.techniques.Hook;
-      adminToproll.value = selectedUser.techniques.Toproll;
-      adminAttendance.value = selectedUser.attendance;
-      adminVerified.checked = selectedUser.verified;
+      adminUserName.textContent = user.name;
+      adminUserMeta.textContent = 'Usuario: @' + user.username + ' · Edad: ' + user.age + ' · Técnica: ' + user.activeTechnique;
+      adminVerificationPill.textContent = user.verified ? 'Verificado' : 'No verificado';
+      adminVerificationPill.className = user.verified ? 'pill pill-hot' : 'pill';
 
-      adminExerciseOneValue.textContent = selectedUser.exerciseOne + '%';
-      adminExerciseTwoValue.textContent = selectedUser.exerciseTwo + '%';
-      adminHookValue.textContent = selectedUser.techniques.Hook + '%';
-      adminToprollValue.textContent = selectedUser.techniques.Toproll + '%';
-      adminAttendanceValue.textContent = selectedUser.attendance + ' de ' + selectedUser.attendanceGoal;
+      adminExerciseOne.value = user.exerciseOne;
+      adminExerciseTwo.value = user.exerciseTwo;
+      adminTechnique.value = user.activeTechnique;
+      adminHook.value = user.techniques.Hook;
+      adminToproll.value = user.techniques.Toproll;
+      adminAttendance.value = user.attendance;
+      adminVerified.checked = user.verified;
 
-      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
-        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
-        : 'Este aspirante aún no cumple los requisitos completos.';
+      adminKnowledge.value = user.knowledge;
+      adminSocial.value = user.social;
+      adminCounseling.value = user.counseling;
+      adminPayment.value = user.payment;
+
+      adminPsychControl.value = String(user.psych.control);
+      adminPsychGroup.value = String(user.psych.group);
+      adminPsychPressure.value = String(user.psych.pressure);
+      adminPsychResult.textContent = user.psych.completed ? user.psych.result : 'Pendiente';
+
+      adminAge.value = user.age;
+      adminCouncilVote.value = user.councilVote;
+      adminDocumentComplete.checked = user.documentComplete;
+
+      adminExerciseOneValue.textContent = user.exerciseOne + '%';
+      adminExerciseTwoValue.textContent = user.exerciseTwo + '%';
+      adminHookValue.textContent = user.techniques.Hook + '%';
+      adminToprollValue.textContent = user.techniques.Toproll + '%';
+      adminAttendanceValue.textContent = user.attendance + ' de ' + user.attendanceGoal;
+      adminKnowledgeValue.textContent = user.knowledge + '/20';
+      adminSocialValue.textContent = user.social + '/20';
+      adminCounselingValue.textContent = user.counseling;
+      adminPaymentValue.textContent = user.payment === 'pago' ? 'Pago' : 'No pago';
+
+      const isAdult = Number(user.age) >= 18;
+      if (user.councilVote === 'aprobado') {
+        adminCouncilLink.href = isAdult ? '#documento-mayor' : '#documento-menor';
+        adminCouncilLink.textContent = isAdult ? 'Link para mayor de edad' : 'Link para menor de edad';
+        adminCouncilLink.classList.remove('disabled-link');
+      } else {
+        adminCouncilLink.href = '#';
+        adminCouncilLink.textContent = 'Link desactivado';
+        adminCouncilLink.classList.add('disabled-link');
+      }
+
+      adminUnlockMessage.textContent = isFullyApproved(user)
+        ? 'Este aspirante ya cumple todos los requisitos y está listo para la felicitación final.'
+        : 'Este aspirante todavía no completa todos los requisitos.';
     }
 
     function selectUser(username) {
@@ -538,32 +976,6 @@
       syncAdminForm();
     }
 
-    function showLoggedInView(role) {
-      document.querySelector('.hero-panel').classList.add('hidden');
-      document.querySelector('.login-panel').classList.add('hidden');
-
-      if (role === 'admin') {
-        adminApp.classList.remove('hidden');
-        memberApp.classList.add('hidden');
-        renderAdminView();
-      } else {
-        memberApp.classList.remove('hidden');
-        adminApp.classList.add('hidden');
-        renderProgressBars();
-        showTab('tab-1');
-      }
-    }
-
-    function resetVisibleWorkspace() {
-      document.querySelector('.hero-panel').classList.remove('hidden');
-      document.querySelector('.login-panel').classList.remove('hidden');
-      memberApp.classList.add('hidden');
-      adminApp.classList.add('hidden');
-      welcomeBox.classList.add('hidden');
-      loginMessage.textContent = '';
-      loginForm.reset();
-    }
-
     function showTab(tabId) {
       tabButtons.forEach(function (button) {
         const isActive = button.dataset.tab === tabId;
@@ -578,10 +990,41 @@
       });
     }
 
-    function mountMemberApp() {
-      memberApp.classList.remove('hidden');
-      renderProgressBars();
-      showTab('tab-1');
+    function showLoggedInView(role) {
+      document.querySelector('.hero-panel').classList.add('hidden');
+      document.querySelector('.login-panel').classList.add('hidden');
+
+      if (role === 'admin') {
+        memberApp.classList.add('hidden');
+        adminApp.classList.remove('hidden');
+        currentMember = null;
+        renderAdminView();
+      } else {
+        currentMember = ensureUser(activeAccount.username);
+        adminApp.classList.add('hidden');
+        memberApp.classList.remove('hidden');
+        updateMemberPanel();
+      }
+
+      startSessionMonitoring();
+    }
+
+    function saveSelectedUser(evaluatePsych = false) {
+      if (evaluatePsych) {
+        renderPsychResult(selectedUser);
+      }
+
+      persistUserState();
+      syncAdminForm();
+      renderUserList();
+
+      if (currentMember && currentMember.username === selectedUser.username) {
+        updateMemberPanel();
+      }
+    }
+
+    function resetVisibleWorkspace(message) {
+      forceLogout(message || '');
     }
 
     tabButtons.forEach(function (button) {
@@ -594,102 +1037,146 @@
       });
     });
 
-    document.querySelectorAll('input[name="technique"]').forEach(function (radio) {
-      radio.addEventListener('change', function (event) {
-        appState.activeTechnique = event.target.value;
-        renderProgressBars();
-      });
-    });
-
     addAttendanceBtn.addEventListener('click', function () {
-      if (appState.attendance < appState.attendanceGoal) {
-        appState.attendance += 1;
-        renderProgressBars();
+      if (!currentMember) {
+        return;
+      }
+
+      if (currentMember.attendance < currentMember.attendanceGoal) {
+        currentMember.attendance += 1;
+        persistUserState();
+        updateMemberPanel();
       }
     });
 
     resetAttendanceBtn.addEventListener('click', function () {
-      appState.attendance = 0;
-      renderProgressBars();
+      if (!currentMember) {
+        return;
+      }
+
+      currentMember.attendance = 0;
+      persistUserState();
+      updateMemberPanel();
     });
 
     userSearch.addEventListener('input', renderUserList);
 
     adminTechnique.addEventListener('change', function (event) {
       selectedUser.activeTechnique = event.target.value;
-      syncAdminForm();
-      renderUserList();
+      saveSelectedUser();
     });
 
     adminExerciseOne.addEventListener('input', function (event) {
       selectedUser.exerciseOne = Number(event.target.value);
-      adminExerciseOneValue.textContent = selectedUser.exerciseOne + '%';
-      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
-        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
-        : 'Este aspirante aún no cumple los requisitos completos.';
-      renderUserList();
+      saveSelectedUser();
     });
 
     adminExerciseTwo.addEventListener('input', function (event) {
       selectedUser.exerciseTwo = Number(event.target.value);
-      adminExerciseTwoValue.textContent = selectedUser.exerciseTwo + '%';
-      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
-        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
-        : 'Este aspirante aún no cumple los requisitos completos.';
-      renderUserList();
+      saveSelectedUser();
     });
 
     adminHook.addEventListener('input', function (event) {
       selectedUser.techniques.Hook = Number(event.target.value);
-      adminHookValue.textContent = selectedUser.techniques.Hook + '%';
-      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
-        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
-        : 'Este aspirante aún no cumple los requisitos completos.';
-      renderUserList();
+      saveSelectedUser();
     });
 
     adminToproll.addEventListener('input', function (event) {
       selectedUser.techniques.Toproll = Number(event.target.value);
-      adminToprollValue.textContent = selectedUser.techniques.Toproll + '%';
-      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
-        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
-        : 'Este aspirante aún no cumple los requisitos completos.';
-      renderUserList();
+      saveSelectedUser();
     });
 
     adminAttendance.addEventListener('input', function (event) {
       selectedUser.attendance = Number(event.target.value);
-      adminAttendanceValue.textContent = selectedUser.attendance + ' de ' + selectedUser.attendanceGoal;
-      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
-        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
-        : 'Este aspirante aún no cumple los requisitos completos.';
-      renderUserList();
+      saveSelectedUser();
     });
 
     adminVerified.addEventListener('change', function (event) {
       selectedUser.verified = event.target.checked;
-      syncAdminForm();
-      renderUserList();
+      saveSelectedUser();
+    });
+
+    adminKnowledge.addEventListener('input', function (event) {
+      selectedUser.knowledge = Number(event.target.value);
+      saveSelectedUser();
+    });
+
+    adminSocial.addEventListener('input', function (event) {
+      selectedUser.social = Number(event.target.value);
+      saveSelectedUser();
+    });
+
+    adminCounseling.addEventListener('change', function (event) {
+      selectedUser.counseling = event.target.value;
+      saveSelectedUser();
+    });
+
+    adminPayment.addEventListener('change', function (event) {
+      selectedUser.payment = event.target.value;
+      saveSelectedUser();
+    });
+
+    adminPsychControl.addEventListener('change', function (event) {
+      selectedUser.psych.control = Number(event.target.value);
+      saveSelectedUser(true);
+    });
+
+    adminPsychGroup.addEventListener('change', function (event) {
+      selectedUser.psych.group = Number(event.target.value);
+      saveSelectedUser(true);
+    });
+
+    adminPsychPressure.addEventListener('change', function (event) {
+      selectedUser.psych.pressure = Number(event.target.value);
+      saveSelectedUser(true);
+    });
+
+    adminAge.addEventListener('input', function (event) {
+      selectedUser.age = Number(event.target.value);
+      saveSelectedUser();
+    });
+
+    adminCouncilVote.addEventListener('change', function (event) {
+      selectedUser.councilVote = event.target.value;
+      saveSelectedUser();
+    });
+
+    adminDocumentComplete.addEventListener('change', function (event) {
+      selectedUser.documentComplete = event.target.checked;
+      saveSelectedUser();
     });
 
     saveUserBtn.addEventListener('click', function () {
-      syncAdminForm();
+      saveSelectedUser();
       adminStatus.textContent = 'Cambios guardados para ' + selectedUser.name + '.';
     });
 
     unlockAllBtn.addEventListener('click', function () {
+      selectedUser.verified = true;
       selectedUser.exerciseOne = 100;
       selectedUser.exerciseTwo = 100;
-      selectedUser.techniques[selectedUser.activeTechnique] = 100;
+      selectedUser.activeTechnique = 'Hook';
+      selectedUser.techniques.Hook = 100;
+      selectedUser.techniques.Toproll = 100;
       selectedUser.attendance = selectedUser.attendanceGoal;
-      selectedUser.verified = true;
+      selectedUser.knowledge = 20;
+      selectedUser.social = 20;
+      selectedUser.counseling = 'aprobado';
+      selectedUser.payment = 'pago';
+      selectedUser.psych.control = 2;
+      selectedUser.psych.group = 2;
+      selectedUser.psych.pressure = 2;
+      selectedUser.psych.completed = true;
+      selectedUser.psych.result = 'Perfil estable. Baja predisposición a ansiedad, impulsividad y conflicto grupal.';
+      selectedUser.councilVote = 'aprobado';
+      selectedUser.documentComplete = true;
+      persistUserState();
       renderAdminView();
       adminStatus.textContent = 'Requisitos completados para ' + selectedUser.name + '.';
     });
 
     backToLoginBtn.addEventListener('click', function () {
-      activeAccount = null;
-      resetVisibleWorkspace();
+      resetVisibleWorkspace('Sesión cerrada manualmente.');
     });
 
     loginForm.addEventListener('submit', function (event) {
@@ -705,22 +1192,20 @@
         return;
       }
 
-      const validAccount = acceptedAccounts.some(function (account) {
-        return account.username === username && account.password === password;
+      const account = acceptedAccounts.find(function (entry) {
+        return entry.username === username && entry.password === password;
       });
 
-      activeAccount = acceptedAccounts.find(function (account) {
-        return account.username === username && account.password === password;
-      }) || null;
-
-      if (validAccount) {
-        loginMessage.textContent = 'Acceso correcto. Prepárate para la fuerza de Top3Vulcans.';
-        welcomeBox.classList.remove('hidden');
-        showLoggedInView(activeAccount.role);
-      } else {
+      if (!account) {
         loginMessage.textContent = 'Usuario o contraseña incorrectos.';
         welcomeBox.classList.add('hidden');
+        return;
       }
+
+      activeAccount = account;
+      loginMessage.textContent = 'Acceso correcto. Prepárate para la fuerza de Top3Vulcans.';
+      welcomeBox.classList.remove('hidden');
+      showLoggedInView(account.role);
     });
   </script>
 </body>

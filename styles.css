@@ -342,6 +342,7 @@ h2 {
     gap: 18px;
     align-items: end;
     margin-bottom: 18px;
+    flex-wrap: wrap;
 }
 
 .section-tag {
@@ -596,6 +597,7 @@ h2 {
     gap: 18px;
     align-items: end;
     margin-bottom: 18px;
+    flex-wrap: wrap;
 }
 
 .admin-layout {
@@ -698,13 +700,93 @@ h2 {
     accent-color: #ff7a21;
 }
 
-.admin-actions-column {
+.session-timer {
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 176, 102, 0.2);
+    background: rgba(255, 243, 232, 0.05);
+    color: #ffd9c1;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.score-stack,
+.psych-grid {
     display: grid;
-    gap: 10px;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.score-row,
+.psych-result-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+}
+
+.score-field {
+    display: grid;
+    gap: 8px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 176, 102, 0.18);
+    background: rgba(255, 176, 102, 0.1);
+    color: #ffe3ce;
+    font-weight: 800;
+    margin: 10px 0;
+}
+
+.hidden-text {
+    min-height: 1.4em;
+    color: rgba(246, 201, 181, 0.68);
+    font-size: 0.92rem;
+}
+
+.final-message {
+    margin-top: 14px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 176, 102, 0.22);
+    background: linear-gradient(90deg, rgba(255, 81, 29, 0.22), rgba(255, 178, 56, 0.2));
+    color: #fff7ea;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    text-align: center;
+}
+
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.compact {
+    margin-top: 4px;
+}
+
+.tab-two-grid,
+.tab-three-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tab-two-grid .dashboard-card,
+.tab-three-grid .dashboard-card {
+    min-height: 100%;
 }
 
 .admin-summary {
     margin-bottom: 14px;
+}
+
+.admin-actions-column {
+    display: grid;
+    gap: 10px;
 }
 
 @keyframes floatArm {
@@ -757,6 +839,8 @@ h2 {
         grid-template-columns: 1fr;
     }
 
+    .tab-two-grid,
+    .tab-three-grid,
     .admin-layout,
     .admin-grid {
         grid-template-columns: 1fr;
