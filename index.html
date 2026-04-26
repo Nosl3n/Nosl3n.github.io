@@ -183,19 +183,192 @@
         </article>
       </div>
     </section>
+
+    <section id="adminApp" class="admin-app hidden" aria-label="Panel de administrador">
+      <div class="admin-hero">
+        <div>
+          <span class="section-tag">Administrador</span>
+          <h2>Verificación y control de aspirantes</h2>
+        </div>
+        <p class="member-note">
+          La cuenta admin puede revisar usuarios existentes, confirmar su estado y modificar progreso, técnica y asistencias.
+        </p>
+      </div>
+
+      <div class="admin-layout">
+        <aside class="admin-sidebar">
+          <div class="admin-search-box">
+            <label for="userSearch">Buscar aspirante</label>
+            <input id="userSearch" type="text" placeholder="Escribe un usuario o nombre">
+          </div>
+
+          <div id="userList" class="user-list" aria-label="Lista de usuarios"></div>
+        </aside>
+
+        <section class="admin-workbench">
+          <article class="dashboard-card admin-summary">
+            <div class="card-head">
+              <h3 id="adminUserName">Selecciona un aspirante</h3>
+              <span id="adminVerificationPill" class="pill">Sin seleccionar</span>
+            </div>
+            <p id="adminUserMeta" class="card-copy">Aquí verás y modificarás el avance del aspirante elegido.</p>
+          </article>
+
+          <div class="admin-grid">
+            <article class="dashboard-card">
+              <div class="card-head">
+                <h3>Progreso de ejercicios</h3>
+                <span class="pill">Editables</span>
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Barra isométrica 1</strong>
+                  <span id="adminExerciseOneValue">0%</span>
+                </div>
+                <input id="adminExerciseOne" class="range-control" type="range" min="0" max="100" step="1">
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Barra isométrica 2</strong>
+                  <span id="adminExerciseTwoValue">0%</span>
+                </div>
+                <input id="adminExerciseTwo" class="range-control" type="range" min="0" max="100" step="1">
+              </div>
+            </article>
+
+            <article class="dashboard-card">
+              <div class="card-head">
+                <h3>Técnica y asistencias</h3>
+                <span class="pill pill-hot">Hook / Toproll</span>
+              </div>
+
+              <label class="field-label" for="adminTechnique">Técnica activa</label>
+              <select id="adminTechnique" class="select-control">
+                <option value="Hook">Hook</option>
+                <option value="Toproll">Toproll</option>
+              </select>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Hook</strong>
+                  <span id="adminHookValue">0%</span>
+                </div>
+                <input id="adminHook" class="range-control" type="range" min="0" max="100" step="1">
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Toproll</strong>
+                  <span id="adminToprollValue">0%</span>
+                </div>
+                <input id="adminToproll" class="range-control" type="range" min="0" max="100" step="1">
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Asistencias</strong>
+                  <span id="adminAttendanceValue">0 de 5</span>
+                </div>
+                <input id="adminAttendance" class="range-control" type="range" min="0" max="5" step="1">
+              </div>
+            </article>
+
+            <article class="dashboard-card">
+              <div class="card-head">
+                <h3>Estado de control</h3>
+                <span class="pill">Verificación</span>
+              </div>
+
+              <label class="toggle-row">
+                <input id="adminVerified" type="checkbox">
+                <span>Aspirante verificado</span>
+              </label>
+
+              <div class="admin-actions-column">
+                <button id="saveUserBtn" class="login-button" type="button">Guardar cambios</button>
+                <button id="unlockAllBtn" class="ghost-button" type="button">Completar requisitos</button>
+                <button id="backToLoginBtn" class="ghost-button ghost-muted" type="button">Cerrar sesión</button>
+              </div>
+
+              <p id="adminStatus" class="login-message"></p>
+            </article>
+          </div>
+
+          <div class="unlock-status">
+            <span class="section-tag">Estado del aspirante</span>
+            <p id="adminUnlockMessage">Selecciona un usuario para ver si ya cumple con los requisitos de desbloqueo.</p>
+          </div>
+        </section>
+      </div>
+    </section>
   </main>
 
   <script>
     const acceptedAccounts = [
-      { username: 'aspirante1', password: 'lava123' },
-      { username: 'top3vulcans', password: 'misti2026' },
-      { username: 'arequipa', password: 'mistiFuego' }
+      { username: 'aspirante1', password: 'lava123', role: 'member', name: 'Aspirante 1' },
+      { username: 'aspirante2', password: 'lava456', role: 'member', name: 'Aspirante 2' },
+      { username: 'top3vulcans', password: 'misti2026', role: 'member', name: 'Top3Vulcans Aspirante' },
+      { username: 'arequipa', password: 'mistiFuego', role: 'member', name: 'Aspirante Arequipa' },
+      { username: 'admin', password: 'admin2026', role: 'admin', name: 'Administrador Top3Vulcans' }
     ];
+
+    const userState = [
+      {
+        username: 'aspirante1',
+        name: 'Aspirante 1',
+        verified: true,
+        exerciseOne: 65,
+        exerciseTwo: 45,
+        activeTechnique: 'Hook',
+        techniques: { Hook: 58, Toproll: 36 },
+        attendance: 3,
+        attendanceGoal: 5
+      },
+      {
+        username: 'aspirante2',
+        name: 'Aspirante 2',
+        verified: false,
+        exerciseOne: 38,
+        exerciseTwo: 52,
+        activeTechnique: 'Toproll',
+        techniques: { Hook: 28, Toproll: 61 },
+        attendance: 2,
+        attendanceGoal: 5
+      },
+      {
+        username: 'top3vulcans',
+        name: 'Top3Vulcans Aspirante',
+        verified: true,
+        exerciseOne: 80,
+        exerciseTwo: 74,
+        activeTechnique: 'Hook',
+        techniques: { Hook: 69, Toproll: 42 },
+        attendance: 4,
+        attendanceGoal: 5
+      },
+      {
+        username: 'arequipa',
+        name: 'Aspirante Arequipa',
+        verified: false,
+        exerciseOne: 22,
+        exerciseTwo: 31,
+        activeTechnique: 'Hook',
+        techniques: { Hook: 25, Toproll: 18 },
+        attendance: 1,
+        attendanceGoal: 5
+      }
+    ];
+
+    let activeAccount = null;
+    let selectedUser = userState[0];
 
     const loginForm = document.getElementById('loginForm');
     const loginMessage = document.getElementById('loginMessage');
     const welcomeBox = document.getElementById('welcomeBox');
     const memberApp = document.getElementById('memberApp');
+    const adminApp = document.getElementById('adminApp');
     const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
     const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
     const selectedTechnique = document.getElementById('selectedTechnique');
@@ -211,6 +384,28 @@
     const unlockMessage = document.getElementById('unlockMessage');
     const addAttendanceBtn = document.getElementById('addAttendanceBtn');
     const resetAttendanceBtn = document.getElementById('resetAttendanceBtn');
+    const userSearch = document.getElementById('userSearch');
+    const userList = document.getElementById('userList');
+    const adminUserName = document.getElementById('adminUserName');
+    const adminUserMeta = document.getElementById('adminUserMeta');
+    const adminVerificationPill = document.getElementById('adminVerificationPill');
+    const adminExerciseOne = document.getElementById('adminExerciseOne');
+    const adminExerciseTwo = document.getElementById('adminExerciseTwo');
+    const adminTechnique = document.getElementById('adminTechnique');
+    const adminHook = document.getElementById('adminHook');
+    const adminToproll = document.getElementById('adminToproll');
+    const adminAttendance = document.getElementById('adminAttendance');
+    const adminVerified = document.getElementById('adminVerified');
+    const adminExerciseOneValue = document.getElementById('adminExerciseOneValue');
+    const adminExerciseTwoValue = document.getElementById('adminExerciseTwoValue');
+    const adminHookValue = document.getElementById('adminHookValue');
+    const adminToprollValue = document.getElementById('adminToprollValue');
+    const adminAttendanceValue = document.getElementById('adminAttendanceValue');
+    const adminUnlockMessage = document.getElementById('adminUnlockMessage');
+    const adminStatus = document.getElementById('adminStatus');
+    const saveUserBtn = document.getElementById('saveUserBtn');
+    const unlockAllBtn = document.getElementById('unlockAllBtn');
+    const backToLoginBtn = document.getElementById('backToLoginBtn');
 
     const appState = {
       exerciseOne: 65,
@@ -223,6 +418,16 @@
       attendance: 3,
       attendanceGoal: 5
     };
+
+    function getMemberProgress(user) {
+      return user.exerciseOne >= 100 && user.exerciseTwo >= 100 && user.techniques[user.activeTechnique] >= 100 && user.attendance >= user.attendanceGoal;
+    }
+
+    function findUser(username) {
+      return userState.find(function (user) {
+        return user.username === username;
+      });
+    }
 
     function renderProgressBars() {
       exerciseOneBar.style.width = appState.exerciseOne + '%';
@@ -264,6 +469,99 @@
       unlockMessage.textContent = unlocked
         ? 'Todos los exámenes fueron completados. Las pestañas 2 y 3 ya están activas.'
         : 'Aún falta completar los dos ejercicios, la técnica elegida y las 5 asistencias para activar las pestañas 2 y 3.';
+    }
+
+    function renderUserList() {
+      const query = userSearch.value.trim().toLowerCase();
+      userList.innerHTML = '';
+
+      userState
+        .filter(function (user) {
+          return !query || user.username.toLowerCase().includes(query) || user.name.toLowerCase().includes(query);
+        })
+        .forEach(function (user) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'user-card';
+          button.innerHTML =
+            '<strong>' + user.name + '</strong>' +
+            '<span>@' + user.username + '</span>' +
+            '<em>' + (getMemberProgress(user) ? 'Listo para desbloqueo' : 'En evaluación') + '</em>';
+
+          button.addEventListener('click', function () {
+            selectUser(user.username);
+          });
+
+          userList.appendChild(button);
+        });
+    }
+
+    function syncAdminForm() {
+      adminUserName.textContent = selectedUser.name;
+      adminUserMeta.textContent = 'Usuario: @' + selectedUser.username + ' · Técnica activa: ' + selectedUser.activeTechnique;
+      adminVerificationPill.textContent = selectedUser.verified ? 'Verificado' : 'No verificado';
+      adminVerificationPill.className = selectedUser.verified ? 'pill pill-hot' : 'pill';
+
+      adminExerciseOne.value = selectedUser.exerciseOne;
+      adminExerciseTwo.value = selectedUser.exerciseTwo;
+      adminTechnique.value = selectedUser.activeTechnique;
+      adminHook.value = selectedUser.techniques.Hook;
+      adminToproll.value = selectedUser.techniques.Toproll;
+      adminAttendance.value = selectedUser.attendance;
+      adminVerified.checked = selectedUser.verified;
+
+      adminExerciseOneValue.textContent = selectedUser.exerciseOne + '%';
+      adminExerciseTwoValue.textContent = selectedUser.exerciseTwo + '%';
+      adminHookValue.textContent = selectedUser.techniques.Hook + '%';
+      adminToprollValue.textContent = selectedUser.techniques.Toproll + '%';
+      adminAttendanceValue.textContent = selectedUser.attendance + ' de ' + selectedUser.attendanceGoal;
+
+      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
+        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
+        : 'Este aspirante aún no cumple los requisitos completos.';
+    }
+
+    function selectUser(username) {
+      const user = findUser(username);
+      if (!user) {
+        return;
+      }
+
+      selectedUser = user;
+      syncAdminForm();
+      renderUserList();
+      adminStatus.textContent = 'Usuario seleccionado: ' + user.name + '.';
+    }
+
+    function renderAdminView() {
+      renderUserList();
+      syncAdminForm();
+    }
+
+    function showLoggedInView(role) {
+      document.querySelector('.hero-panel').classList.add('hidden');
+      document.querySelector('.login-panel').classList.add('hidden');
+
+      if (role === 'admin') {
+        adminApp.classList.remove('hidden');
+        memberApp.classList.add('hidden');
+        renderAdminView();
+      } else {
+        memberApp.classList.remove('hidden');
+        adminApp.classList.add('hidden');
+        renderProgressBars();
+        showTab('tab-1');
+      }
+    }
+
+    function resetVisibleWorkspace() {
+      document.querySelector('.hero-panel').classList.remove('hidden');
+      document.querySelector('.login-panel').classList.remove('hidden');
+      memberApp.classList.add('hidden');
+      adminApp.classList.add('hidden');
+      welcomeBox.classList.add('hidden');
+      loginMessage.textContent = '';
+      loginForm.reset();
     }
 
     function showTab(tabId) {
@@ -315,6 +613,85 @@
       renderProgressBars();
     });
 
+    userSearch.addEventListener('input', renderUserList);
+
+    adminTechnique.addEventListener('change', function (event) {
+      selectedUser.activeTechnique = event.target.value;
+      syncAdminForm();
+      renderUserList();
+    });
+
+    adminExerciseOne.addEventListener('input', function (event) {
+      selectedUser.exerciseOne = Number(event.target.value);
+      adminExerciseOneValue.textContent = selectedUser.exerciseOne + '%';
+      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
+        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
+        : 'Este aspirante aún no cumple los requisitos completos.';
+      renderUserList();
+    });
+
+    adminExerciseTwo.addEventListener('input', function (event) {
+      selectedUser.exerciseTwo = Number(event.target.value);
+      adminExerciseTwoValue.textContent = selectedUser.exerciseTwo + '%';
+      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
+        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
+        : 'Este aspirante aún no cumple los requisitos completos.';
+      renderUserList();
+    });
+
+    adminHook.addEventListener('input', function (event) {
+      selectedUser.techniques.Hook = Number(event.target.value);
+      adminHookValue.textContent = selectedUser.techniques.Hook + '%';
+      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
+        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
+        : 'Este aspirante aún no cumple los requisitos completos.';
+      renderUserList();
+    });
+
+    adminToproll.addEventListener('input', function (event) {
+      selectedUser.techniques.Toproll = Number(event.target.value);
+      adminToprollValue.textContent = selectedUser.techniques.Toproll + '%';
+      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
+        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
+        : 'Este aspirante aún no cumple los requisitos completos.';
+      renderUserList();
+    });
+
+    adminAttendance.addEventListener('input', function (event) {
+      selectedUser.attendance = Number(event.target.value);
+      adminAttendanceValue.textContent = selectedUser.attendance + ' de ' + selectedUser.attendanceGoal;
+      adminUnlockMessage.textContent = getMemberProgress(selectedUser)
+        ? 'Este aspirante ya cumple todos los requisitos y puede ver las pestañas 2 y 3.'
+        : 'Este aspirante aún no cumple los requisitos completos.';
+      renderUserList();
+    });
+
+    adminVerified.addEventListener('change', function (event) {
+      selectedUser.verified = event.target.checked;
+      syncAdminForm();
+      renderUserList();
+    });
+
+    saveUserBtn.addEventListener('click', function () {
+      syncAdminForm();
+      adminStatus.textContent = 'Cambios guardados para ' + selectedUser.name + '.';
+    });
+
+    unlockAllBtn.addEventListener('click', function () {
+      selectedUser.exerciseOne = 100;
+      selectedUser.exerciseTwo = 100;
+      selectedUser.techniques[selectedUser.activeTechnique] = 100;
+      selectedUser.attendance = selectedUser.attendanceGoal;
+      selectedUser.verified = true;
+      renderAdminView();
+      adminStatus.textContent = 'Requisitos completados para ' + selectedUser.name + '.';
+    });
+
+    backToLoginBtn.addEventListener('click', function () {
+      activeAccount = null;
+      resetVisibleWorkspace();
+    });
+
     loginForm.addEventListener('submit', function (event) {
       event.preventDefault();
 
@@ -332,12 +709,14 @@
         return account.username === username && account.password === password;
       });
 
+      activeAccount = acceptedAccounts.find(function (account) {
+        return account.username === username && account.password === password;
+      }) || null;
+
       if (validAccount) {
         loginMessage.textContent = 'Acceso correcto. Prepárate para la fuerza de Top3Vulcans.';
         welcomeBox.classList.remove('hidden');
-        document.querySelector('.hero-panel').classList.add('hidden');
-        document.querySelector('.login-panel').classList.add('hidden');
-        mountMemberApp();
+        showLoggedInView(activeAccount.role);
       } else {
         loginMessage.textContent = 'Usuario o contraseña incorrectos.';
         welcomeBox.classList.add('hidden');
