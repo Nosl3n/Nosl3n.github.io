@@ -37,6 +37,11 @@ body::before {
     padding: 32px 0;
 }
 
+.member-app {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
 .hero-panel,
 .login-panel {
     border: 1px solid rgba(255, 176, 102, 0.18);
@@ -80,7 +85,12 @@ h2 {
 .hero-copy,
 .panel-copy,
 .login-message,
-.welcome-box p {
+.welcome-box p,
+.member-note,
+.card-copy,
+.helper-copy,
+.unlock-status p,
+.locked-panel p {
     color: #f6c9b5;
     line-height: 1.6;
 }
@@ -266,6 +276,254 @@ h2 {
     display: none;
 }
 
+.member-app {
+    border: 1px solid rgba(255, 176, 102, 0.18);
+    border-radius: 28px;
+    padding: 28px;
+    background: rgba(18, 10, 9, 0.76);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(12px);
+}
+
+.member-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 18px;
+}
+
+.section-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 176, 102, 0.12);
+    color: #ffcfab;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.member-note {
+    max-width: 42rem;
+    margin: 0;
+    text-align: right;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 18px 0 22px;
+}
+
+.tab-button {
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 176, 102, 0.22);
+    background: rgba(255, 243, 232, 0.06);
+    color: #ffe8db;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    background: linear-gradient(90deg, #ff511d, #ffb238);
+    color: #240904;
+    border-color: transparent;
+}
+
+.tab-button.locked {
+    opacity: 0.48;
+    cursor: not-allowed;
+}
+
+.tab-panel {
+    display: block;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.dashboard-card,
+.locked-panel,
+.unlock-status {
+    border-radius: 22px;
+    padding: 20px;
+    border: 1px solid rgba(255, 176, 102, 0.16);
+    background: rgba(255, 243, 232, 0.05);
+}
+
+.dashboard-card {
+    min-height: 100%;
+}
+
+.card-head,
+.tech-highlight,
+.attendance-meter,
+.admin-tools {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: center;
+}
+
+.card-head {
+    margin-bottom: 8px;
+}
+
+.pill {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 176, 102, 0.14);
+    color: #ffd0b0;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.pill-hot {
+    background: rgba(255, 91, 31, 0.18);
+}
+
+.progress-group,
+.mini-progress-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.progress-row {
+    display: grid;
+    gap: 8px;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: baseline;
+}
+
+.progress-track {
+    width: 100%;
+    height: 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.progress-track.small {
+    height: 11px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #ff511d, #ffb238);
+    box-shadow: 0 0 18px rgba(255, 140, 62, 0.35);
+}
+
+.tech-selector {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+}
+
+.tech-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 176, 102, 0.18);
+    background: rgba(255, 243, 232, 0.05);
+    cursor: pointer;
+}
+
+.tech-option input {
+    accent-color: #ff7a21;
+}
+
+.tech-highlight {
+    margin-bottom: 10px;
+}
+
+.tech-percentage {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #ffd7b4;
+}
+
+.attendance-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.attendance-meter {
+    align-items: flex-start;
+}
+
+.attendance-dots {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.attendance-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 176, 102, 0.45);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.attendance-dot.filled {
+    background: linear-gradient(180deg, #ffb238, #ff5b1f);
+    box-shadow: 0 0 12px rgba(255, 110, 35, 0.45);
+}
+
+.admin-tools {
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 176, 102, 0.12);
+}
+
+.admin-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ghost-button {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 176, 102, 0.22);
+    background: rgba(255, 243, 232, 0.05);
+    color: #ffe9df;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.ghost-muted {
+    opacity: 0.8;
+}
+
+.unlock-status {
+    margin-top: 16px;
+}
+
+.locked-panel {
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
 @media (max-width: 900px) {
     .page-shell {
         grid-template-columns: 1fr;
@@ -275,6 +533,23 @@ h2 {
     .login-panel {
         justify-self: stretch;
         max-width: none;
+    }
+
+    .member-header,
+    .attendance-meter,
+    .admin-tools,
+    .card-head,
+    .tech-highlight {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .member-note {
+        text-align: left;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -302,5 +577,10 @@ h2 {
         width: 72px;
         height: 72px;
         font-size: 0.85rem;
+    }
+
+    .member-app {
+        padding: 18px;
+        border-radius: 22px;
     }
 }

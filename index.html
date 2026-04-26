@@ -54,6 +54,135 @@
         <p>Bienvenido al espacio de aspirantes de Top3Vulcans.</p>
       </div>
     </section>
+
+    <section id="memberApp" class="member-app hidden" aria-label="Panel de aspirante">
+      <div class="member-header">
+        <div>
+          <span class="section-tag">Panel del aspirante</span>
+          <h2>Tu avance en Top3Vulcans</h2>
+        </div>
+        <p class="member-note">
+          Las pestañas 2 y 3 permanecen bloqueadas hasta completar todos los exámenes, la técnica y las 5 asistencias.
+        </p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Secciones del aspirante">
+        <button class="tab-button active" type="button" role="tab" aria-selected="true" data-tab="tab-1">1. Progreso</button>
+        <button class="tab-button locked" type="button" role="tab" aria-selected="false" data-tab="tab-2" disabled>2. Bloqueada</button>
+        <button class="tab-button locked" type="button" role="tab" aria-selected="false" data-tab="tab-3" disabled>3. Bloqueada</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-1" role="tabpanel">
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <div class="card-head">
+              <h3>Ejercicios isométricos en barra</h3>
+              <span class="pill">2 básicos</span>
+            </div>
+            <p class="card-copy">Mide tu avance en los dos ejercicios base de la etapa de aspirantes.</p>
+
+            <div class="progress-group">
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Barra isométrica 1</strong>
+                  <span id="exerciseOneValue">65%</span>
+                </div>
+                <div class="progress-track"><div id="exerciseOneBar" class="progress-fill" style="width: 65%;"></div></div>
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-labels">
+                  <strong>Barra isométrica 2</strong>
+                  <span id="exerciseTwoValue">45%</span>
+                </div>
+                <div class="progress-track"><div id="exerciseTwoBar" class="progress-fill" style="width: 45%;"></div></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="dashboard-card">
+            <div class="card-head">
+              <h3>Técnica de lucha de brazos</h3>
+              <span class="pill pill-hot">Hook / Toproll</span>
+            </div>
+            <p class="card-copy">Elige la técnica principal y revisa tu progreso en ella y en las dos barras.</p>
+
+            <div class="tech-selector">
+              <label class="tech-option">
+                <input type="radio" name="technique" value="Hook" checked>
+                <span>Hook</span>
+              </label>
+              <label class="tech-option">
+                <input type="radio" name="technique" value="Toproll">
+                <span>Toproll</span>
+              </label>
+            </div>
+
+            <div class="tech-highlight">
+              <div>
+                <span class="section-tag">Técnica activa</span>
+                <strong id="selectedTechnique">Hook</strong>
+              </div>
+              <span id="techniqueValue" class="tech-percentage">58%</span>
+            </div>
+
+            <div class="mini-progress-list">
+              <div>
+                <span>Hook</span>
+                <div class="progress-track small"><div id="hookBar" class="progress-fill" style="width: 58%;"></div></div>
+              </div>
+              <div>
+                <span>Toproll</span>
+                <div class="progress-track small"><div id="toprollBar" class="progress-fill" style="width: 36%;"></div></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="dashboard-card attendance-card">
+            <div class="card-head">
+              <h3>Sistema de asistencias</h3>
+              <span class="pill">Meta: 5</span>
+            </div>
+            <p class="card-copy">El admin registra las asistencias del aspirante hasta completar las cinco necesarias.</p>
+
+            <div class="attendance-meter">
+              <div id="attendanceDots" class="attendance-dots" aria-label="Asistencias registradas"></div>
+              <div>
+                <strong id="attendanceValue">3 de 5</strong>
+                <p class="helper-copy">Cada asistencia acerca el desbloqueo de las pestañas 2 y 3.</p>
+              </div>
+            </div>
+
+            <div class="admin-tools">
+              <span class="section-tag">Control admin</span>
+              <div class="admin-buttons">
+                <button id="addAttendanceBtn" class="ghost-button" type="button">Registrar asistencia</button>
+                <button id="resetAttendanceBtn" class="ghost-button ghost-muted" type="button">Reiniciar</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="unlock-status">
+          <span class="section-tag">Estado de desbloqueo</span>
+          <p id="unlockMessage">Completa los dos ejercicios, la técnica escogida y las 5 asistencias para activar las pestañas 2 y 3.</p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-2" role="tabpanel" hidden>
+        <article class="locked-panel">
+          <h3>Pestaña 2</h3>
+          <p>Bloqueada. Se activará cuando el aspirante complete todos los exámenes y asistencias.</p>
+        </article>
+      </div>
+
+      <div class="tab-panel" id="tab-3" role="tabpanel" hidden>
+        <article class="locked-panel">
+          <h3>Pestaña 3</h3>
+          <p>Bloqueada. Aquí podrás agregar más evaluaciones o contenido interno después del desbloqueo.</p>
+        </article>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -66,6 +195,125 @@
     const loginForm = document.getElementById('loginForm');
     const loginMessage = document.getElementById('loginMessage');
     const welcomeBox = document.getElementById('welcomeBox');
+    const memberApp = document.getElementById('memberApp');
+    const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
+    const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
+    const selectedTechnique = document.getElementById('selectedTechnique');
+    const techniqueValue = document.getElementById('techniqueValue');
+    const exerciseOneBar = document.getElementById('exerciseOneBar');
+    const exerciseTwoBar = document.getElementById('exerciseTwoBar');
+    const exerciseOneValue = document.getElementById('exerciseOneValue');
+    const exerciseTwoValue = document.getElementById('exerciseTwoValue');
+    const hookBar = document.getElementById('hookBar');
+    const toprollBar = document.getElementById('toprollBar');
+    const attendanceDots = document.getElementById('attendanceDots');
+    const attendanceValue = document.getElementById('attendanceValue');
+    const unlockMessage = document.getElementById('unlockMessage');
+    const addAttendanceBtn = document.getElementById('addAttendanceBtn');
+    const resetAttendanceBtn = document.getElementById('resetAttendanceBtn');
+
+    const appState = {
+      exerciseOne: 65,
+      exerciseTwo: 45,
+      techniques: {
+        Hook: 58,
+        Toproll: 36
+      },
+      activeTechnique: 'Hook',
+      attendance: 3,
+      attendanceGoal: 5
+    };
+
+    function renderProgressBars() {
+      exerciseOneBar.style.width = appState.exerciseOne + '%';
+      exerciseTwoBar.style.width = appState.exerciseTwo + '%';
+      exerciseOneValue.textContent = appState.exerciseOne + '%';
+      exerciseTwoValue.textContent = appState.exerciseTwo + '%';
+      selectedTechnique.textContent = appState.activeTechnique;
+      techniqueValue.textContent = appState.techniques[appState.activeTechnique] + '%';
+      hookBar.style.width = appState.techniques.Hook + '%';
+      toprollBar.style.width = appState.techniques.Toproll + '%';
+      renderAttendance();
+      updateUnlockState();
+    }
+
+    function renderAttendance() {
+      attendanceDots.innerHTML = '';
+
+      for (let index = 0; index < appState.attendanceGoal; index += 1) {
+        const dot = document.createElement('span');
+        dot.className = index < appState.attendance ? 'attendance-dot filled' : 'attendance-dot';
+        attendanceDots.appendChild(dot);
+      }
+
+      attendanceValue.textContent = appState.attendance + ' de ' + appState.attendanceGoal;
+    }
+
+    function allRequirementsMet() {
+      return appState.exerciseOne >= 100 && appState.exerciseTwo >= 100 && appState.techniques[appState.activeTechnique] >= 100 && appState.attendance >= appState.attendanceGoal;
+    }
+
+    function updateUnlockState() {
+      const unlocked = allRequirementsMet();
+
+      tabButtons.slice(1).forEach(function (button) {
+        button.disabled = !unlocked;
+        button.classList.toggle('locked', !unlocked);
+      });
+
+      unlockMessage.textContent = unlocked
+        ? 'Todos los exámenes fueron completados. Las pestañas 2 y 3 ya están activas.'
+        : 'Aún falta completar los dos ejercicios, la técnica elegida y las 5 asistencias para activar las pestañas 2 y 3.';
+    }
+
+    function showTab(tabId) {
+      tabButtons.forEach(function (button) {
+        const isActive = button.dataset.tab === tabId;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', String(isActive));
+      });
+
+      tabPanels.forEach(function (panel) {
+        const isActive = panel.id === tabId;
+        panel.classList.toggle('active', isActive);
+        panel.hidden = !isActive;
+      });
+    }
+
+    function mountMemberApp() {
+      memberApp.classList.remove('hidden');
+      renderProgressBars();
+      showTab('tab-1');
+    }
+
+    tabButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        if (button.disabled) {
+          return;
+        }
+
+        showTab(button.dataset.tab);
+      });
+    });
+
+    document.querySelectorAll('input[name="technique"]').forEach(function (radio) {
+      radio.addEventListener('change', function (event) {
+        appState.activeTechnique = event.target.value;
+        renderProgressBars();
+      });
+    });
+
+    addAttendanceBtn.addEventListener('click', function () {
+      if (appState.attendance < appState.attendanceGoal) {
+        appState.attendance += 1;
+        renderProgressBars();
+      }
+    });
+
+    resetAttendanceBtn.addEventListener('click', function () {
+      appState.attendance = 0;
+      renderProgressBars();
+    });
 
     loginForm.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -87,6 +335,9 @@
       if (validAccount) {
         loginMessage.textContent = 'Acceso correcto. Prepárate para la fuerza de Top3Vulcans.';
         welcomeBox.classList.remove('hidden');
+        document.querySelector('.hero-panel').classList.add('hidden');
+        document.querySelector('.login-panel').classList.add('hidden');
+        mountMemberApp();
       } else {
         loginMessage.textContent = 'Usuario o contraseña incorrectos.';
         welcomeBox.classList.add('hidden');
