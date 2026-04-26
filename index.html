@@ -60,6 +60,7 @@
         <div>
           <span class="section-tag">Panel del aspirante</span>
           <h2>Tu avance en Top3Vulcans</h2>
+          <p class="member-name">Aspirante: <strong id="memberName">-</strong></p>
         </div>
         <p class="member-note">
           Las pestañas 2 y 3 permanecen bloqueadas hasta completar todos los exámenes, la técnica y las 5 asistencias.
@@ -118,12 +119,8 @@
 
             <div class="mini-progress-list">
               <div>
-                <span>Hook</span>
-                <div class="progress-track small"><div id="hookBar" class="progress-fill" style="width: 58%;"></div></div>
-              </div>
-              <div>
-                <span>Toproll</span>
-                <div class="progress-track small"><div id="toprollBar" class="progress-fill" style="width: 36%;"></div></div>
+                <span id="activeTechniqueLabel">Hook</span>
+                <div class="progress-track small"><div id="activeTechniqueBar" class="progress-fill" style="width: 58%;"></div></div>
               </div>
             </div>
           </article>
@@ -140,14 +137,6 @@
               <div>
                 <strong id="attendanceValue">3 de 5</strong>
                 <p class="helper-copy">Cada asistencia acerca el desbloqueo de las pestañas 2 y 3.</p>
-              </div>
-            </div>
-
-            <div class="admin-tools">
-              <span class="section-tag">Control admin</span>
-              <div class="admin-buttons">
-                <button id="addAttendanceBtn" class="ghost-button" type="button">Registrar asistencia</button>
-                <button id="resetAttendanceBtn" class="ghost-button ghost-muted" type="button">Reiniciar</button>
               </div>
             </div>
           </article>
@@ -590,6 +579,7 @@
     const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
     const memberSessionTimer = document.getElementById('memberSessionTimer');
     const adminSessionTimer = document.getElementById('adminSessionTimer');
+    const memberName = document.getElementById('memberName');
     const selectedTechnique = document.getElementById('selectedTechnique');
     const techniqueValue = document.getElementById('techniqueValue');
     const exerciseOneBar = document.getElementById('exerciseOneBar');
@@ -613,8 +603,8 @@
     const councilLink = document.getElementById('councilLink');
     const documentStatus = document.getElementById('documentStatus');
     const finalMessage = document.getElementById('finalMessage');
-    const addAttendanceBtn = document.getElementById('addAttendanceBtn');
-    const resetAttendanceBtn = document.getElementById('resetAttendanceBtn');
+    const activeTechniqueBar = document.getElementById('activeTechniqueBar');
+    const activeTechniqueLabel = document.getElementById('activeTechniqueLabel');
     const userSearch = document.getElementById('userSearch');
     const userList = document.getElementById('userList');
     const adminUserName = document.getElementById('adminUserName');
@@ -694,7 +684,7 @@
         user.verified &&
         user.exerciseOne >= 100 &&
         user.exerciseTwo >= 100 &&
-        user.techniques[user.activeTechnique] >= 100 &&
+        Math.max(user.techniques.Hook || 0, user.techniques.Toproll || 0) >= 100 &&
         user.attendance >= user.attendanceGoal
       );
     }
@@ -805,10 +795,21 @@
       exerciseTwoBar.style.width = user.exerciseTwo + '%';
       exerciseOneValue.textContent = user.exerciseOne + '%';
       exerciseTwoValue.textContent = user.exerciseTwo + '%';
+      memberName.textContent = user.name;
       selectedTechnique.textContent = user.activeTechnique;
       techniqueValue.textContent = user.techniques[user.activeTechnique] + '%';
-      hookBar.style.width = user.techniques.Hook + '%';
-      toprollBar.style.width = user.techniques.Toproll + '%';
+      if (activeTechniqueBar) {
+        activeTechniqueBar.style.width = user.techniques[user.activeTechnique] + '%';
+      }
+      if (activeTechniqueLabel) {
+        activeTechniqueLabel.textContent = user.activeTechnique;
+      }
+      if (hookBar) {
+        hookBar.style.width = user.techniques.Hook + '%';
+      }
+      if (toprollBar) {
+        toprollBar.style.width = user.techniques.Toproll + '%';
+      }
 
       attendanceDots.innerHTML = '';
       for (let index = 0; index < user.attendanceGoal; index += 1) {
@@ -821,13 +822,15 @@
 
       const tabOneComplete = isTabOneComplete(user);
       tabButtons.slice(1).forEach(function (button) {
-        button.disabled = !tabOneComplete;
-        button.classList.toggle('locked', !tabOneComplete);
+        const shouldShow = tabOneComplete && (button.dataset.tab === 'tab-2' || (button.dataset.tab === 'tab-3' && isTabTwoComplete(user)));
+        button.hidden = !shouldShow;
+        button.disabled = !shouldShow;
+        button.classList.toggle('locked', !shouldShow);
       });
 
       unlockMessage.textContent = tabOneComplete
-        ? 'La pestaña 1 ya está completa. Las pestañas 2 y 3 están disponibles.'
-        : 'Completa los dos ejercicios, la técnica asignada, la asistencia mínima y la verificación para activar las pestañas 2 y 3.';
+        ? 'La pestaña 1 ya está completa. Solo se muestran las secciones desbloqueadas.'
+        : 'Completa los dos ejercicios, una técnica y la verificación para activar la pestaña 2.';
 
       knowledgeValue.textContent = user.knowledge + '/20';
       socialValue.textContent = user.social + '/20';
@@ -1037,27 +1040,6 @@
       });
     });
 
-    addAttendanceBtn.addEventListener('click', function () {
-      if (!currentMember) {
-        return;
-      }
-
-      if (currentMember.attendance < currentMember.attendanceGoal) {
-        currentMember.attendance += 1;
-        persistUserState();
-        updateMemberPanel();
-      }
-    });
-
-    resetAttendanceBtn.addEventListener('click', function () {
-      if (!currentMember) {
-        return;
-      }
-
-      currentMember.attendance = 0;
-      persistUserState();
-      updateMemberPanel();
-    });
 
     userSearch.addEventListener('input', renderUserList);
 
