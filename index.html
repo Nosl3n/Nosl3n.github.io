@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nelson Broyer Paco Chipana · Robótica agrícola</title>
-  <meta name="description" content="Nelson Broyer Paco Chipana — Investigador doctoral MSCA en AIGreenBots (Universidad de Extremadura, RoboLab). Fusión de sensores y percepción para robots agrícolas.">
+  <title>Nelson Broyer Paco Chipana · Agricultural Robotics</title>
+  <meta name="description" content="Nelson Broyer Paco Chipana — MSCA Doctoral Researcher at AIGreenBots (University of Extremadura, RoboLab). Sensor fusion and perception for agricultural robots.">
   <meta name="author" content="Nelson Broyer Paco Chipana">
   <meta name="theme-color" content="#0f2a22">
   <meta property="og:type" content="profile">
@@ -16,12 +16,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=4">
   <script>
     (function () {
-      var l;
-      try { l = localStorage.getItem('lang'); } catch (e) {}
-      if (!l) l = (navigator.language || 'es').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+      var l = 'en';
+      try { if (localStorage.getItem('lang') === 'es') l = 'es'; } catch (e) {}
       document.documentElement.classList.add('lang-' + l);
       document.documentElement.lang = l;
     })();
@@ -43,19 +42,21 @@
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top" aria-label="Inicio">
+    <a class="brand" href="#top" aria-label="Home">
       <span class="brand-mark">NB</span>
       <span class="brand-name">Nelson Broyer</span>
     </a>
-    <nav class="nav-links" aria-label="Secciones">
+    <nav class="nav-links" aria-label="Sections">
       <a href="#research"><span class="es">Investigación</span><span class="en">Research</span></a>
       <a href="#experience"><span class="es">Trayectoria</span><span class="en">Experience</span></a>
       <a href="#publications"><span class="es">Publicaciones</span><span class="en">Publications</span></a>
+      <a href="#beyond"><span class="es">Fuera del lab</span><span class="en">Beyond the lab</span></a>
       <a href="#contact"><span class="es">Contacto</span><span class="en">Contact</span></a>
     </nav>
-    <div class="lang" role="group" aria-label="Idioma / Language">
-      <button type="button" data-lang="es">ES</button>
-      <button type="button" data-lang="en">EN</button>
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <svg class="lang-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <button type="button" data-lang="en" title="English">EN</button>
+      <button type="button" data-lang="es" title="Español">ES</button>
     </div>
   </div>
 </header>
@@ -92,24 +93,20 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c1.2-3.6 4-5 7-5s5.8 1.4 7 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
             <span class="es">Guardar contacto</span><span class="en">Save contact</span>
           </a>
-          <a class="btn" href="https://www.linkedin.com/in/nelson-broyer-paco-chipana-8414a5327" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.56v4.91H10z"/></svg>
-            LinkedIn
-          </a>
         </div>
-        <ul class="socials" aria-label="Perfiles">
-          <li><a href="https://www.linkedin.com/in/nelson-broyer-paco-chipana-8414a5327" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.56v4.91H10z"/></svg></a></li>
-          <li><a href="https://scholar.google.com/citations?user=MmLfqBsAAAAJ" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 1 9.5l4 2.73V12a7 7 0 0 1 14 0v.23l4-2.73z"/><circle cx="12" cy="16" r="5.5" fill="currentColor"/></svg></a></li>
-          <li><a href="https://orcid.org/0000-0002-9147-3334" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8.3 7.2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM7.5 10h1.6v7.2H7.5zm3.4 0h3a3.6 3.6 0 0 1 0 7.2h-3zm1.6 1.45v4.3h1.3a2.15 2.15 0 0 0 0-4.3z"/></svg></a></li>
-          <li><a href="https://github.com/Nosl3n" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a></li>
-          <li><a href="https://www.instagram.com/nosl_3n" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg></a></li>
+        <ul class="socials" aria-label="Profiles">
+          <li><a class="social s-linkedin" href="https://www.linkedin.com/in/nelson-broyer-paco-chipana-8414a5327" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.56v4.91H10z"/></svg><span>LinkedIn</span></a></li>
+          <li><a class="social s-scholar" href="https://scholar.google.com/citations?user=MmLfqBsAAAAJ" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 1 9.5l4 2.73V12a7 7 0 0 1 14 0v.23l4-2.73z"/><circle cx="12" cy="16" r="5.5" fill="currentColor"/></svg><span>Google Scholar</span></a></li>
+          <li><a class="social s-orcid" href="https://orcid.org/0000-0002-9147-3334" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8.3 7.2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM7.5 10h1.6v7.2H7.5zm3.4 0h3a3.6 3.6 0 0 1 0 7.2h-3zm1.6 1.45v4.3h1.3a2.15 2.15 0 0 0 0-4.3z"/></svg><span>ORCID</span></a></li>
+          <li><a class="social s-github" href="https://github.com/Nosl3n" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span>GitHub</span></a></li>
+          <li><a class="social s-instagram" href="https://www.instagram.com/nosl_3n" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg><span>Instagram</span></a></li>
         </ul>
       </div>
     </div>
   </section>
 
   <!-- KEY FACTS -->
-  <section class="facts" aria-label="Datos clave">
+  <section class="facts" aria-label="Key facts">
     <div class="wrap facts-grid">
       <div class="fact">
         <span class="fact-k">Horizon Europe</span>
@@ -355,7 +352,7 @@
   </section>
 
   <!-- BEYOND THE LAB -->
-  <section class="section section-alt beyond">
+  <section id="beyond" class="section section-alt beyond">
     <div class="wrap beyond-grid">
       <header class="section-head">
         <p class="kicker"><span class="es">Fuera del laboratorio</span><span class="en">Beyond the lab</span></p>
@@ -395,16 +392,20 @@
           <span class="en">Let’s collaborate on robotics, perception and agriculture.</span>
         </h2>
       </div>
-      <ul class="contact-list">
-        <li><span class="c-k">Email</span><a href="mailto:nelson.bpch@unex.es">nelson.bpch@unex.es</a></li>
-        <li><span class="c-k">ORCID</span><a href="https://orcid.org/0000-0002-9147-3334" target="_blank" rel="noopener">0000-0002-9147-3334</a></li>
-        <li><span class="c-k">LinkedIn</span><a href="https://www.linkedin.com/in/nelson-broyer-paco-chipana-8414a5327" target="_blank" rel="noopener">in/nelson-broyer-paco-chipana</a></li>
-        <li><span class="c-k">Scholar</span><a href="https://scholar.google.com/citations?user=MmLfqBsAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
-        <li><span class="c-k">GitHub</span><a href="https://github.com/Nosl3n" target="_blank" rel="noopener">github.com/Nosl3n</a></li>
-        <li><span class="c-k">Instagram</span><a href="https://www.instagram.com/nosl_3n" target="_blank" rel="noopener">@nosl_3n</a></li>
-        <li><span class="c-k"><span class="es">Teléfono</span><span class="en">Phone</span></span><a href="tel:+34613861022">+34 613 861 022</a></li>
-        <li><span class="c-k"><span class="es">Ubicación</span><span class="en">Location</span></span><span>RoboLab · Escuela Politécnica, Cáceres</span></li>
-      </ul>
+      <div class="contact-side">
+        <a class="email-big" href="mailto:nelson.bpch@unex.es">
+          <span class="c-k"><span class="es">Correo electrónico</span><span class="en">Email</span></span>
+          <span class="email-addr">nelson.bpch@unex.es</span>
+        </a>
+        <p class="c-k profiles-title"><span class="es">Perfiles y redes</span><span class="en">Profiles &amp; social</span></p>
+        <div class="profiles">
+          <a class="profile s-linkedin" href="https://www.linkedin.com/in/nelson-broyer-paco-chipana-8414a5327" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.56v4.91H10z"/></svg><span class="p-name">LinkedIn</span><span class="p-handle">nelson-broyer-paco-chipana</span></a>
+          <a class="profile s-scholar" href="https://scholar.google.com/citations?user=MmLfqBsAAAAJ" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 1 9.5l4 2.73V12a7 7 0 0 1 14 0v.23l4-2.73z"/><circle cx="12" cy="16" r="5.5" fill="currentColor"/></svg><span class="p-name">Google Scholar</span><span class="p-handle">NB Paco-Chipana</span></a>
+          <a class="profile s-orcid" href="https://orcid.org/0000-0002-9147-3334" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8.3 7.2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM7.5 10h1.6v7.2H7.5zm3.4 0h3a3.6 3.6 0 0 1 0 7.2h-3zm1.6 1.45v4.3h1.3a2.15 2.15 0 0 0 0-4.3z"/></svg><span class="p-name">ORCID</span><span class="p-handle">0000-0002-9147-3334</span></a>
+          <a class="profile s-github" href="https://github.com/Nosl3n" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span class="p-name">GitHub</span><span class="p-handle">Nosl3n</span></a>
+          <a class="profile s-instagram" href="https://www.instagram.com/nosl_3n" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg><span class="p-name">Instagram</span><span class="p-handle">@nosl_3n</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -420,6 +421,6 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>
