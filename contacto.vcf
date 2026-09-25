@@ -1,12 +1,13 @@
 BEGIN:VCARD
 VERSION:3.0
-N:Paco Chipana;Nelson Broyer;;;
+N:Paco-Chipana;Nelson Broyer;;MSc.;
 FN:Nelson Broyer Paco Chipana
-ORG:Universidad de Extremadura;RoboLab
-TITLE:MSCA Doctoral Researcher · AIGreenBots
+ORG:Universidad de Extremadura;Robotics and Artificial Vision Laboratory (RoboLab)
+TITLE:PhD Researcher (MSCA - AIGreenBots)
 EMAIL;TYPE=INTERNET,WORK:nelson.bpch@unex.es
 ADR;TYPE=WORK:;;Escuela Politécnica;Cáceres;;;España
 URL:https://nosl3n.github.io/
+URL:http://robolab.unex.es
 URL:https://orcid.org/0000-0002-9147-3334
 URL:https://www.linkedin.com/in/nelson-broyer-paco-chipana-8414a5327
 URL:https://scholar.google.com/citations?user=MmLfqBsAAAAJ
